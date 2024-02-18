@@ -1,0 +1,41 @@
+version: '3.3'
+
+volumes:
+  db-data:
+
+services:
+  postgres:
+    image: "postgres:15-alpine"
+    volumes:
+      - db-data:/pgdata
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: blank
+      POSTGRES_DB: parkingapi
+      POSTGRES_USER: parkingapi
+      PGDATA: /pgdata
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_DEBUG: 'true'
+      DJANGO_ALLOWED_HOSTS: '*'
+      DB_NAME: parkingapi
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: parkingapi
+      DB_PASSWORD: blank
+
+    # Make interactive
+    stdin_open: true
+    tty: true
+    entrypoint: python manage.py runserver

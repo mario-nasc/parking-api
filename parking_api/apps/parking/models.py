@@ -20,6 +20,15 @@ class Parking(models.Model):
     paid_at = models.DateTimeField(null=True)
     left_at = models.DateTimeField(null=True)
 
+    @property
+    def status(self):
+        if self.left_at:
+            return 'Carro saiu do estacionamento'
+        if self.paid_at and not self.left_at:
+            return 'Pendente pagamento'
+        if not self.paid_at and not self.left_at:
+            return "No estacionamento" 
+
     class Meta:
         verbose_name = _("Parking")
         verbose_name_plural = _("Parkings")

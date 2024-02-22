@@ -1,0 +1,9 @@
+[
+    {
+        "model": "parking.ParkingLot",
+        "pk": 1,
+        "fields": {
+            "name": "Estacionamento do mário"
+        }
+    }
+]

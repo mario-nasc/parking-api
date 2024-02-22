@@ -15,6 +15,7 @@ class Client(models.Model):
 
 class Vehicle(models.Model):
     type = models.CharField(max_length=255)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='vehicles')
     plate = models.CharField(
         max_length=7,
         validators=[

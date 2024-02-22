@@ -4,7 +4,7 @@ volumes:
   db-data:
 
 services:
-  postgres:
+  postgres_parking:
     image: "postgres:15-alpine"
     volumes:
       - db-data:/pgdata
@@ -16,12 +16,12 @@ services:
       POSTGRES_USER: parkingapi
       PGDATA: /pgdata
 
-  app:
+  app_parking:
     build:
       dockerfile: Dockerfile
       context: .
     depends_on:
-      - postgres
+      - postgres_parking
     volumes:
       - ./:/usr/src/app
     ports:
@@ -30,7 +30,7 @@ services:
       DJANGO_DEBUG: 'true'
       DJANGO_ALLOWED_HOSTS: '*'
       DB_NAME: parkingapi
-      DB_HOST: postgres
+      DB_HOST: postgres_parking
       DB_PORT: 5432
       DB_USER: parkingapi
       DB_PASSWORD: blank
@@ -38,4 +38,4 @@ services:
     # Make interactive
     stdin_open: true
     tty: true
-    entrypoint: python manage.py runserver
+    entrypoint: python manage.py runserver 0.0.0.0:8000

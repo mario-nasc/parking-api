@@ -12,6 +12,8 @@ class ParkingLot(models.Model):
         verbose_name_plural = _("ParkingLots")
         db_table = "parking_lots"
 
+    def __str__(self):
+        return self.name
 
 class Parking(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name='parking', on_delete=models.CASCADE)
@@ -27,7 +29,7 @@ class Parking(models.Model):
         if self.paid_at and not self.left_at:
             return 'Pendente pagamento'
         if not self.paid_at and not self.left_at:
-            return "No estacionamento" 
+            return "No estacionamento"
 
     class Meta:
         verbose_name = _("Parking")

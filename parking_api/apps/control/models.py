@@ -12,6 +12,8 @@ class Client(models.Model):
         verbose_name_plural = _("Clients")
         db_table = "clients"
 
+    def __str__(self):
+        return self.name
 
 class Vehicle(models.Model):
     type = models.CharField(max_length=255)
@@ -30,3 +32,6 @@ class Vehicle(models.Model):
         verbose_name = _("Vehicle")
         verbose_name_plural = _("Vehicles")
         db_table = "vehicles"
+
+    def __str__(self):
+        return self.plate

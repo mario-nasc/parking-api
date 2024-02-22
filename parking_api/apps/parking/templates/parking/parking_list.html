@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'style.css'%}"><link/>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div class="container">
+            {% block main %}
+                <div class="row flex">
+                    <div class="col-sm">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Estacionamento</th>
+                                    <th>Carro</th>
+                                    <th>Placa</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for parking in parkings %}
+                                <tr>
+                                    <td> {{ parking.parking_lot.name }} </td>
+                                    <td> {{ parking.vehicle.type }} </td>
+                                    <td> {{ parking.vehicle.plate }} </td>
+                                    <td> {{ parking.status }} </td>
+                                </tr>
+                                {% empty %}
+                                <li class="list-group-item liCard">Doesn't exist any client</li>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            {% endblock %}
+    </body>
+</html>

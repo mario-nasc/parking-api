@@ -1,6 +1,7 @@
 from django.urls import path
 
 from apps.parking.api.viewsets import ParkingViewSet
+from apps.parking.views import ParkingView
 
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
         'api/history-plate/<str:plate>',
         ParkingViewSet.as_view({'get': 'history_plate'}),
         name='history_plate'),
+    path('', ParkingView.as_view(), name='parking_view'),
 ]

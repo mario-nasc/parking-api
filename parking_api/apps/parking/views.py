@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from apps.parking.models import Parking
+
+
+class ParkingView(ListView):
+    model = Parking
+    context_object_name = 'parkings'

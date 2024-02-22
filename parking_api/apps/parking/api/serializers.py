@@ -31,6 +31,7 @@ class ParkingLotSerializer(serializers.Serializer):
 
 class EnterParkingSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=False)
+    status = serializers.CharField(required=False)
     client = ClientSerializer()
     vehicle = VehicleSerializer()
 
@@ -52,6 +53,7 @@ class EnterParkingSerializer(serializers.Serializer):
         )
         validated_data['id'] = parking.id
         validated_data['vehicle']['id'] = vehicle.id
+        validated_data['status'] = parking.status
         return validated_data
 
 
